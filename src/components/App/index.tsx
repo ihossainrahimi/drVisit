@@ -18,7 +18,9 @@ export const App = ({ children }: AppProps) => {
   return (
     <>
       <Header />
-      <div className={classes.container}>{children}</div>
+      <div dir='rtl' className={classes.container}>
+        {children}
+      </div>
     </>
   );
 };

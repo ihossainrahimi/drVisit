@@ -34,9 +34,11 @@ export const Header = () => {
   }
 
   return (
-    <Grid container justifyContent='space-between' alignItems='center' role='main'>
+    <Grid container justifyContent='space-between' alignItems='center'>
       <Grid item xl={4} lg={4} md={2} sm={6}>
-        <Link href={`${websiteUrls.files}/${userData.data.folder_id}`}></Link>
+        <Link href={`${websiteUrls.files}/${userData.data.folder_id}`}>
+          <Typography>های</Typography>
+        </Link>
       </Grid>
       <Grid item xl={5} lg={5} md={5} sm={2}></Grid>
       {userData.data.id ? (
@@ -68,7 +70,7 @@ export const Header = () => {
                 <Link href={websiteUrls.register}>
                   <Button variant='outlined'>
                     <Typography color='white' variant='button'>
-                      Register
+                      ثبت نام
                     </Typography>
                   </Button>
                 </Link>
@@ -77,7 +79,7 @@ export const Header = () => {
                 <Link href={websiteUrls.login}>
                   <Button variant='contained'>
                     <Typography color='white' variant='button'>
-                      Sign in
+                      ورود{' '}
                     </Typography>
                   </Button>
                 </Link>

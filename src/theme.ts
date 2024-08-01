@@ -21,6 +21,7 @@ export const applicationTheme = (prefersDarkMode: boolean) => {
         main: colorPalette.secondary
       }
     },
+    direction: 'rtl',
     typography: {
       allVariants: {
         color: foreground,

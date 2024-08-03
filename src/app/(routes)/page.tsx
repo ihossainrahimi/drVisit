@@ -4,7 +4,9 @@ import { Grid, Typography } from '@mui/material';
 
 import FullPageLoading from '@/components/FullPageLoading';
 import { SearchInput } from '@/components/SearchInput';
+import { Testimonies } from '@/components/Testimonies';
 import { colorPalette } from '@/constants/colorPalette';
+import { quotes } from '@/constants/quotes';
 import { useAppSelector } from '@/store';
 
 const HomePage = () => {
@@ -38,6 +40,9 @@ const HomePage = () => {
         </Grid>
         <Grid item xs={8}>
           <SearchInput />
+        </Grid>
+        <Grid item xs={12}>
+          <Testimonies title='دکتر‌دکتر' quotes={quotes} />
         </Grid>
       </Grid>
     </>

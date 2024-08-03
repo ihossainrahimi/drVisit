@@ -1,22 +1,47 @@
 'use client';
 
+import { Grid, Typography } from '@mui/material';
+
 import FullPageLoading from '@/components/FullPageLoading';
+import { SearchInput } from '@/components/SearchInput';
+import { colorPalette } from '@/constants/colorPalette';
 import { useAppSelector } from '@/store';
 
 const HomePage = () => {
   const userData = useAppSelector((state) => state.userData);
 
-  // useEffect(() => {
-  //   if (userData.data.id) {
-  //     router.replace(`${websiteUrls.files}/${userData.data.folder_id}`);
-  //   }
-  // }, [userData.data]);
-
   if (userData.isLoading) {
     return <FullPageLoading />;
   }
 
-  return <></>;
+  return (
+    <>
+      <Grid container spacing={4} justifyContent='center'>
+        <Grid item>
+          <Typography variant='h4' component='span'>
+            بیش از{' '}
+          </Typography>
+          <Typography variant='h4' color={colorPalette.main} component='span'>
+            {' '}
+            ۱۷,۰۰۰{' '}
+          </Typography>
+          <Typography variant='h4' component='span'>
+            پزشک متخصص در
+          </Typography>
+          <Typography variant='h4' color={colorPalette.main} component='span'>
+            {' '}
+            دکتر‌دکتر{' '}
+          </Typography>
+          <Typography variant='h4' component='span'>
+            کنار شما هستند
+          </Typography>
+        </Grid>
+        <Grid item xs={8}>
+          <SearchInput />
+        </Grid>
+      </Grid>
+    </>
+  );
 };
 
 export default HomePage;

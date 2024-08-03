@@ -1,93 +1,98 @@
-import { Button, Grid, Menu, MenuItem, Typography } from '@mui/material';
+import { Favorite, PersonOutlined } from '@mui/icons-material';
+import { Button, Grid, Typography } from '@mui/material';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 
+import { colorPalette } from '@/constants/colorPalette';
 import { websiteUrls } from '@/constants/urls';
-import { useAppDispatch, useAppSelector } from '@/store';
-import { resetUserData } from '@/store/slices/userDataSlice';
+import { useAppSelector } from '@/store';
+
+import { LoginModal } from '../LoginModal';
+import { SearchInput } from '../SearchInput';
+import classes from './index.module.scss';
 
 export const Header = () => {
   const userData = useAppSelector((state) => state.userData);
-  const dispatch = useAppDispatch();
 
-  const pathname = usePathname();
-  const router = useRouter();
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [isOpenLoginModal, setIsOpenLoginModal] = useState(false);
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
+  const handleOpenLoginModal = () => {
+    setIsOpenLoginModal(true);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
+  const handleCloseLoginModal = () => {
+    setIsOpenLoginModal(false);
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    dispatch(resetUserData());
-    router.push(websiteUrls.login);
-  };
-
-  if (['/sign-in', '/register'].includes(pathname) || userData.isLoading) {
-    return <></>;
+  if (window.location.pathname.includes('sign-in')) {
+    return null;
   }
 
   return (
-    <Grid container justifyContent='space-between' alignItems='center'>
-      <Grid item xl={4} lg={4} md={2} sm={6}>
-        <Link href={`${websiteUrls.files}/${userData.data.folder_id}`}>
-          <Typography>های</Typography>
-        </Link>
-      </Grid>
-      <Grid item xl={5} lg={5} md={5} sm={2}></Grid>
-      {userData.data.id ? (
+    <div className={classes.root}>
+      <LoginModal isOpen={isOpenLoginModal} onClose={handleCloseLoginModal} />
+      <Grid container justifyContent='space-between' alignItems='center'>
         <Grid item>
-          <Button variant='text' onClick={handleClick}>
-            <Typography variant='button'>{userData.data.username}</Typography>
+          <Button startIcon={<Favorite color='error' />}>
+            <Link href={websiteUrls.home}>
+              <Typography color={colorPalette.main} variant='h4'>
+                دکتردکتر
+              </Typography>
+            </Link>
           </Button>
-          <Menu
-            id='basic-menu'
-            anchorEl={anchorEl}
-            anchorOrigin={{
-              horizontal: 'center',
-              vertical: 'bottom'
-            }}
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-            MenuListProps={{
-              'aria-labelledby': 'basic-button'
-            }}
-          >
-            <MenuItem onClick={handleLogout}>Logout</MenuItem>
-          </Menu>
         </Grid>
-      ) : (
-        <>
+
+        {window.location.pathname !== websiteUrls.home && (
+          <Grid item xs={5}>
+            <SearchInput />
+          </Grid>
+        )}
+
+        {userData.data.id ? (
+          <Grid item>
+            <Link href={websiteUrls.patientProfile}>
+              <Button startIcon={<PersonOutlined />} variant='outlined'>
+                <Typography color={colorPalette.main} variant='button'>
+                  {userData.data.username}
+                </Typography>
+              </Button>
+            </Link>
+          </Grid>
+        ) : (
           <Grid item sx={{ display: { md: 'block', xs: 'none' } }}>
-            <Grid container spacing={2}>
-              <Grid item>
-                <Link href={websiteUrls.register}>
-                  <Button variant='outlined'>
-                    <Typography color='white' variant='button'>
-                      ثبت نام
-                    </Typography>
-                  </Button>
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href={websiteUrls.login}>
-                  <Button variant='contained'>
-                    <Typography color='white' variant='button'>
-                      ورود{' '}
-                    </Typography>
-                  </Button>
-                </Link>
-              </Grid>
+            <Button
+              onClick={handleOpenLoginModal}
+              startIcon={<PersonOutlined />}
+              variant='outlined'
+            >
+              <Typography color={colorPalette.main} variant='button'>
+                ورود
+              </Typography>
+            </Button>
+          </Grid>
+        )}
+      </Grid>
+      <Grid container justifyContent='space-between' alignItems='center' className={classes.navbar}>
+        <Grid item>
+          <Grid container spacing={2}>
+            <Grid item>
+              <Link href={websiteUrls.expertiseSearch}>
+                <Typography variant='body2'>نوبت دهی</Typography>
+              </Link>
+            </Grid>
+            <Grid item>
+              <Typography variant='body2'>تخصص ها</Typography>
             </Grid>
           </Grid>
-        </>
-      )}
-    </Grid>
+        </Grid>
+        <Grid item>
+          <Link href={websiteUrls.drLogin}>
+            <Typography variant='body2' color={colorPalette.secondary}>
+              برای پزشکان
+            </Typography>
+          </Link>
+        </Grid>
+      </Grid>
+    </div>
   );
 };

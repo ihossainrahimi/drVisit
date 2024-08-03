@@ -12,19 +12,19 @@ importers:
         specifier: ^11.11.0
         version: 11.13.1
       '@emotion/react':
-        specifier: ^11.11.1
+        specifier: ^11.13.0
         version: 11.13.0(@types/react@18.2.20)(react@18.2.0)
       '@emotion/styled':
-        specifier: ^11.11.0
+        specifier: ^11.13.0
         version: 11.13.0(@emotion/react@11.13.0(@types/react@18.2.20)(react@18.2.0))(@types/react@18.2.20)(react@18.2.0)
       '@mui/icons-material':
-        specifier: ^5.14.8
+        specifier: ^5.16.6
         version: 5.16.6(@mui/material@5.16.6(@emotion/react@11.13.0(@types/react@18.2.20)(react@18.2.0))(@emotion/styled@11.13.0(@emotion/react@11.13.0(@types/react@18.2.20)(react@18.2.0))(@types/react@18.2.20)(react@18.2.0))(@types/react@18.2.20)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@types/react@18.2.20)(react@18.2.0)
       '@mui/lab':
         specifier: 5.0.0-alpha.170
         version: 5.0.0-alpha.170(@emotion/react@11.13.0(@types/react@18.2.20)(react@18.2.0))(@emotion/styled@11.13.0(@emotion/react@11.13.0(@types/react@18.2.20)(react@18.2.0))(@types/react@18.2.20)(react@18.2.0))(@mui/material@5.16.6(@emotion/react@11.13.0(@types/react@18.2.20)(react@18.2.0))(@emotion/styled@11.13.0(@emotion/react@11.13.0(@types/react@18.2.20)(react@18.2.0))(@types/react@18.2.20)(react@18.2.0))(@types/react@18.2.20)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@types/react@18.2.20)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@mui/material':
-        specifier: ^5.15.21
+        specifier: ^5.16.6
         version: 5.16.6(@emotion/react@11.13.0(@types/react@18.2.20)(react@18.2.0))(@emotion/styled@11.13.0(@emotion/react@11.13.0(@types/react@18.2.20)(react@18.2.0))(@types/react@18.2.20)(react@18.2.0))(@types/react@18.2.20)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@reduxjs/toolkit':
         specifier: ^1.9.5
@@ -66,7 +66,7 @@ importers:
         specifier: ^1.66.1
         version: 1.77.8
       stylis:
-        specifier: ^4.3.0
+        specifier: ^4.3.2
         version: 4.3.2
       stylis-plugin-rtl:
         specifier: ^2.1.1

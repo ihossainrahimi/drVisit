@@ -1,14 +1,8 @@
 import variables from '../styles/variables.module.scss';
 
 export const colorPalette = {
-  dark: {
-    background: variables.colorPaletteBackgroundEndDark,
-    foreground: variables.colorPaletteForegroundDark
-  },
-  light: {
-    background: variables.colorPaletteBackgroundLight,
-    foreground: variables.colorPaletteForegroundLight
-  },
+  background: variables.colorPaletteBackground,
+  foreground: variables.colorPaletteForeground,
   main: variables.colorPaletteMain,
   secondary: variables.colorPaletteSecondary
 };

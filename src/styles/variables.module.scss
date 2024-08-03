@@ -1,21 +1,13 @@
-$color-palette-main: #005260;
-$color-palette-secondary: #e1b256;
+$color-palette-main: rgb(0, 103, 205);
+$color-palette-secondary: rgb(26, 171, 73);
 
-$color-palette-foreground-dark: #cfab9f;
-$color-palette-background-end-dark: #060809;
-$color-palette-background-start-dark: #212529;
-
-$color-palette-foreground-light: #242424;
-$color-palette-background-light: #f1f1f1;
+$color-palette-foreground: #242424;
+$color-palette-background: #f1f1f1;
 
 :export {
   colorPaletteMain: $color-palette-main;
   colorPaletteSecondary: $color-palette-secondary;
 
-  colorPaletteForegroundDark: $color-palette-foreground-dark;
-  colorPaletteBackgroundEndDark: $color-palette-background-end-dark;
-  colorPaletteBackgroundStartDark: $color-palette-background-start-dark;
-
-  colorPaletteForegroundLight: $color-palette-foreground-light;
-  colorPaletteBackgroundLight: $color-palette-background-light;
+  colorPaletteForeground: $color-palette-foreground;
+  colorPaletteBackground: $color-palette-background;
 }

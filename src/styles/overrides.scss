@@ -7,30 +7,10 @@
 body {
   padding: 1rem 2rem;
   overflow-x: hidden;
+  color: $color-palette-foreground;
+  background-color: $color-palette-background;
 }
 
 a {
   text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  body {
-    color: $color-palette-foreground-dark;
-    background-image: linear-gradient(
-      to right,
-      $color-palette-background-start-dark 0%,
-      $color-palette-background-end-dark 100%
-    );
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  body {
-    color: $color-palette-foreground-light;
-    background-image: linear-gradient(
-      to right,
-      $color-palette-background-light 0%,
-      $color-palette-background-light 100%
-    );
-  }
 }

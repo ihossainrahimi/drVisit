@@ -2,35 +2,27 @@ import { createTheme } from '@mui/material';
 
 import { colorPalette } from './constants/colorPalette';
 
-export const applicationTheme = (prefersDarkMode: boolean) => {
-  const background = prefersDarkMode ? colorPalette.dark.background : colorPalette.light.background;
-  const foreground = prefersDarkMode ? colorPalette.dark.foreground : colorPalette.light.foreground;
+export const applicationTheme = () => {
   return createTheme({
     palette: {
       background: {
-        default: background,
-        paper: background
+        default: colorPalette.background,
+        paper: colorPalette.background
       },
-      mode: prefersDarkMode ? 'dark' : 'light',
       primary: {
-        contrastText: colorPalette.light.foreground,
+        contrastText: colorPalette.foreground,
         main: colorPalette.main
       },
       secondary: {
-        contrastText: colorPalette.light.foreground,
+        contrastText: colorPalette.foreground,
         main: colorPalette.secondary
       }
     },
     direction: 'rtl',
     typography: {
       allVariants: {
-        color: foreground,
-        fontFamily: 'Croissant One'
-      },
-      body1: {
-        fontFamily: 'serif',
-        fontSize: '1.5rem',
-        lineHeight: 2
+        color: colorPalette.foreground,
+        fontFamily: '"Rubik"'
       }
     }
   });

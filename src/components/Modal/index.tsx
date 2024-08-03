@@ -16,7 +16,7 @@ export const Modal = ({
   ...props
 }: ModalProps) => {
   return (
-    <MuiDialog onClose={onClose} {...props}>
+    <MuiDialog dir='rtl' onClose={onClose} {...props}>
       <div className={classes.app_bar}>
         <Typography variant='h6'>{title}</Typography>
         <IconButton id='dialog-close-icon' onClick={onClose} size='small'>

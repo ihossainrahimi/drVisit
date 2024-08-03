@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
-import { responsiveFontSizes, ThemeProvider, useMediaQuery } from '@mui/material';
+import { responsiveFontSizes, ThemeProvider } from '@mui/material';
 import { ReactNode } from 'react';
 import { Provider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
@@ -17,30 +17,30 @@ import { applicationTheme } from '@/theme';
 import { App } from '../App';
 
 export const Layout = ({ children }: { children: ReactNode }) => {
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-
   const cacheRtl = createCache({
     key: 'muirtl',
     stylisPlugins: [prefixer, rtlPlugin]
   });
 
   return (
-    <CacheProvider value={cacheRtl}>
-      <Provider store={store}>
-        <ThemeProvider theme={responsiveFontSizes(applicationTheme(prefersDarkMode))}>
-          <ToastContainer
-            position='top-center'
-            autoClose={4000}
-            hideProgressBar={false}
-            newestOnTop
-            closeOnClick
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-          />
-          <App>{children}</App>
+    <Provider store={store}>
+      <CacheProvider value={cacheRtl}>
+        <ThemeProvider theme={responsiveFontSizes(applicationTheme())}>
+          <div dir='rtl'>
+            <ToastContainer
+              position='top-center'
+              autoClose={4000}
+              hideProgressBar={false}
+              newestOnTop
+              closeOnClick
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
+            <App>{children}</App>
+          </div>
         </ThemeProvider>
-      </Provider>
-    </CacheProvider>
+      </CacheProvider>
+    </Provider>
   );
 };

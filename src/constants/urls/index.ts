@@ -1,6 +1,8 @@
 export const websiteUrls = {
-  files: '/files',
   home: '/',
-  login: '/sign-in',
-  register: '/register'
+  drLogin: '/dr-sign-in',
+  expertiseSearch: '/search/expertise',
+  patientProfile: '/patient',
+  patientAppointments: '/patient/appointments',
+  patientInformation: '/patient/information'
 } as const;

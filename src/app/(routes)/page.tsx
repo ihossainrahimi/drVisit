@@ -38,10 +38,12 @@ const HomePage = () => {
             کنار شما هستند
           </Typography>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={12}></Grid>
+        <Grid item xs={4}>
           <SearchInput />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12}></Grid>
+        <Grid item xs={6}>
           <Testimonies title='دکتر‌دکتر' quotes={quotes} />
         </Grid>
       </Grid>

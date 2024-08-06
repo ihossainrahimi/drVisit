@@ -17,7 +17,7 @@ export const userDataSlice = createSlice({
   name: 'userData',
   initialState: {
     data: initialData,
-    isLoading: true
+    isLoading: false
   },
   reducers: {
     setUserData: (state, action: PayloadAction<User>) => {

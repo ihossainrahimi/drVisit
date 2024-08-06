@@ -1,23 +1,16 @@
-import { getUserInfoApi } from '@/api/methods';
+import { jwtDecode } from 'jwt-decode';
+
+import { User } from '@/api/methods/models';
 import { useAppDispatch } from '@/store';
-import { setLoading, setUserData } from '@/store/slices/userDataSlice';
+import { setUserData } from '@/store/slices/userDataSlice';
 
 export const useUserData = () => {
   const dispatch = useAppDispatch();
 
   const getUserData = () => {
-    dispatch(setLoading(true));
-    if (localStorage.getItem('token')) {
-      getUserInfoApi()
-        .then((response) => {
-          dispatch(setUserData(response.data));
-        })
-        .catch(() => undefined)
-        .finally(() => {
-          dispatch(setLoading(false));
-        });
-    } else {
-      dispatch(setLoading(false));
+    const token = localStorage.getItem('token');
+    if (token) {
+      dispatch(setUserData(jwtDecode<User>(token)));
     }
   };
 

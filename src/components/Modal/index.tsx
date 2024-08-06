@@ -1,6 +1,7 @@
 import { Close } from '@mui/icons-material';
 import { LoadingButton } from '@mui/lab';
 import { Dialog as MuiDialog, IconButton, Typography } from '@mui/material';
+import { FormEvent } from 'react';
 
 import classes from './index.module.scss';
 import { ModalProps } from './models';
@@ -15,6 +16,10 @@ export const Modal = ({
   isLoading,
   ...props
 }: ModalProps) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    onSubmit?.(event);
+  };
   return (
     <MuiDialog dir='rtl' onClose={onClose} {...props}>
       <div className={classes.app_bar}>
@@ -23,7 +28,7 @@ export const Modal = ({
           <Close />
         </IconButton>
       </div>
-      <form onSubmit={(event) => onSubmit?.(event)}>
+      <form onSubmit={handleSubmit}>
         <div className={classes.content}>{children}</div>
         {onSubmit && (
           <div className={classes.submit_button_container}>

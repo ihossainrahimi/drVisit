@@ -1,19 +1,68 @@
 import { Favorite } from '@mui/icons-material';
 import { Grid, TextField, Typography } from '@mui/material';
+import { AxiosResponse } from 'axios';
+import { useRouter } from 'next/navigation';
 import { ChangeEvent, useState } from 'react';
 
+import { loginApi, registerApi } from '@/api/methods';
+import { LoginApiResponse } from '@/api/methods/models';
 import { colorPalette } from '@/constants/colorPalette';
+import { websiteUrls } from '@/constants/urls';
 
 import { Modal } from '../Modal';
 import { LoginModalProps } from './models';
 
 export const LoginModal = ({ onClose, isOpen }: LoginModalProps) => {
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const router = useRouter();
 
-  const handleSubmit = () => {};
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = () => {
+    setIsLoading(true);
+    const handleLoginSuccess = (response: AxiosResponse<LoginApiResponse>) => {
+      localStorage.setItem('token', response.data.token);
+      router.push(websiteUrls.patientProfile);
+    };
+    const loginApiData = {
+      password,
+      username: phoneNumber
+    };
+    loginApi({
+      data: loginApiData
+    })
+      .then((response) => {
+        setIsLoading(false);
+        handleLoginSuccess(response);
+      })
+      .catch(() => {
+        const registerApiData = {
+          firstName: '',
+          lastName: '',
+          gender: true,
+          password,
+          phoneNumber,
+          username: phoneNumber
+        };
+        registerApi({
+          data: registerApiData
+        })
+          .then(() =>
+            loginApi({ data: loginApiData })
+              .then(handleLoginSuccess)
+              .finally(() => setIsLoading(false))
+          )
+          .catch(() => setIsLoading(false));
+      });
+  };
 
   const handleChangePhoneNumber = (event: ChangeEvent<HTMLInputElement>) => {
     setPhoneNumber(event.target.value);
+  };
+
+  const handleChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value);
   };
 
   return (
@@ -21,6 +70,7 @@ export const LoginModal = ({ onClose, isOpen }: LoginModalProps) => {
       onClose={onClose}
       maxWidth='sm'
       fullWidth
+      isLoading={isLoading}
       submitButtonText='دریافت کد تایید'
       onSubmit={handleSubmit}
       submitButtonProps={{
@@ -51,6 +101,9 @@ export const LoginModal = ({ onClose, isOpen }: LoginModalProps) => {
         placeholder='09*********'
         onChange={handleChangePhoneNumber}
       />
+      <br />
+      <br />
+      <TextField required label='رمزعبور' placeholder='*********' onChange={handleChangePassword} />
     </Modal>
   );
 };

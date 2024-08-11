@@ -30,5 +30,21 @@ export const apiUrls = {
   deleteDoctorScheduleApi: {
     method: 'DELETE',
     url: 'api/schedules'
+  },
+  getSchedule: {
+    method: 'GET',
+    url: 'api/schedules/{{scheduleId}}'
+  },
+  assignScheduleToCustomer: {
+    method: 'POST',
+    url: 'api/schedules/{{scheduleId}}/customers/{{customerId}}'
+  },
+  getUserInfo: {
+    method: 'GET',
+    url: 'api/users/{{userId}}'
+  },
+  createVisit: {
+    method: 'POST',
+    url: 'api/visits'
   }
 } as const;

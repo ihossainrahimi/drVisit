@@ -5,12 +5,16 @@ import { formatStringByKey } from '@/utils/formatStringByKey';
 import { api } from '..';
 import { apiUrls } from '../urls';
 import {
+  AssignScheduleToCustomerApiResponse,
+  CreateVisitApiBody,
+  CreateVisitApiResponse,
   DeleteDoctorScheduleApiBody,
-  DeleteDoctorScheduleApiResponse,
   GetDoctorsByProfessionIdApiResponse,
   GetDoctorSchedulesQuery,
   GetDoctorSchedulesResponse,
   GetProfessionApiResponse,
+  GetScheduleApiResponse,
+  GetUserInfoApiResponse,
   LoginApiData,
   LoginApiResponse,
   RegisterApiData,
@@ -84,7 +88,45 @@ export const deleteDoctorScheduleApi = ({
   data
 }: {
   data: DeleteDoctorScheduleApiBody;
-}): Promise<AxiosResponse<DeleteDoctorScheduleApiResponse>> => {
+}): Promise<AxiosResponse<undefined>> => {
   const { method, url } = apiUrls.deleteDoctorScheduleApi;
+  return api({ data, method, url });
+};
+
+export const getScheduleApi = ({
+  doctorId
+}: {
+  doctorId: number;
+}): Promise<AxiosResponse<GetScheduleApiResponse>> => {
+  const { method, url } = apiUrls.getSchedule;
+  return api({ method, url: formatStringByKey(url, { doctorId }) });
+};
+
+export const assignScheduleToCustomerApi = ({
+  scheduleId,
+  customerId
+}: {
+  scheduleId: number;
+  customerId: number;
+}): Promise<AxiosResponse<AssignScheduleToCustomerApiResponse>> => {
+  const { method, url } = apiUrls.assignScheduleToCustomer;
+  return api({ method, url: formatStringByKey(url, { scheduleId, customerId }) });
+};
+
+export const getUserInfoApi = ({
+  userId
+}: {
+  userId: number;
+}): Promise<AxiosResponse<GetUserInfoApiResponse>> => {
+  const { method, url } = apiUrls.getUserInfo;
+  return api({ method, url: formatStringByKey(url, { userId }) });
+};
+
+export const createVisitApi = ({
+  data
+}: {
+  data: CreateVisitApiBody;
+}): Promise<AxiosResponse<CreateVisitApiResponse>> => {
+  const { method, url } = apiUrls.createVisit;
   return api({ data, method, url });
 };

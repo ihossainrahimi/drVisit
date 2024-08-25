@@ -5,12 +5,9 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User } from '@/api/methods/models';
 
 const initialData: User = {
-  id: 0,
-  username: '',
-  email: '',
-  total_storage_gb: 0,
-  used_storage_gb: 0,
-  folder_id: 0
+  exp: 0,
+  iat: 0,
+  sub: ''
 };
 
 export const userDataSlice = createSlice({

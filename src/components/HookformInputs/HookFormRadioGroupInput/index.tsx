@@ -1,19 +1,21 @@
-import { RadioGroup, RadioGroupProps } from '@mui/material';
 import React from 'react';
 import { Controller, ControllerProps } from 'react-hook-form';
 
-export interface HookRadioGroupInputProp
-  extends Omit<ControllerProps<any>, 'render'>,
-    Omit<RadioGroupProps, 'onChange' | 'name' | 'defaultValue' | 'value'> {}
+import { RadioGroupProps } from '@/components/RadioGroup/models';
+import { RadioGroup } from '@/components/RadioGroup/RadioGroup';
 
-const HookRadioGroupInput = ({ name, control, ...rest }: HookRadioGroupInputProp) => {
+export type HookRadioGroupInputProp = Omit<ControllerProps<any>, 'render'> &
+  Omit<RadioGroupProps, 'onChange' | 'name' | 'defaultValue' | 'value'>;
+
+const HookFormRadioGroupInput = ({ name, control, ...rest }: HookRadioGroupInputProp) => {
   return (
     <Controller
       name={name}
       control={control}
+      // @ts-expect-error: ref
       render={(props) => <RadioGroup {...props} {...rest} />}
     />
   );
 };
 
-export default HookRadioGroupInput;
+export default HookFormRadioGroupInput;

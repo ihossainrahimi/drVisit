@@ -73,7 +73,7 @@ export const getDoctorRatesApi = ({
   return api({ method, url: formatStringByKey(url, { professionId }) });
 };
 
-export const getDoctorSchedules = ({
+export const getDoctorSchedulesApi = ({
   params,
   doctorId
 }: {
@@ -116,7 +116,7 @@ export const assignScheduleToCustomerApi = ({
 export const getUserInfoApi = ({
   userId
 }: {
-  userId: number;
+  userId: string;
 }): Promise<AxiosResponse<GetUserInfoApiResponse>> => {
   const { method, url } = apiUrls.getUserInfo;
   return api({ method, url: formatStringByKey(url, { userId }) });

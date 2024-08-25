@@ -1,29 +1,35 @@
 import { Favorite } from '@mui/icons-material';
 import { Grid, TextField, Typography } from '@mui/material';
 import { AxiosResponse } from 'axios';
+import { jwtDecode } from 'jwt-decode';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, useState } from 'react';
 
 import { loginApi, registerApi } from '@/api/methods';
-import { LoginApiResponse } from '@/api/methods/models';
+import { LoginApiResponse, User } from '@/api/methods/models';
 import { colorPalette } from '@/constants/colorPalette';
 import { websiteUrls } from '@/constants/urls';
+import { useAppDispatch } from '@/store';
+import { setUserData } from '@/store/slices/userDataSlice';
 
 import { Modal } from '../Modal';
 import { LoginModalProps } from './models';
 
 export const LoginModal = ({ onClose, isOpen }: LoginModalProps) => {
   const router = useRouter();
-
+  const dispatch = useAppDispatch();
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = () => {
     setIsLoading(true);
+
     const handleLoginSuccess = (response: AxiosResponse<LoginApiResponse>) => {
       localStorage.setItem('token', response.data.token);
+      dispatch(setUserData(jwtDecode<User>(response.data.token)));
       router.push(websiteUrls.patientProfile);
+      onClose();
     };
     const loginApiData = {
       password,
@@ -43,7 +49,8 @@ export const LoginModal = ({ onClose, isOpen }: LoginModalProps) => {
           gender: true,
           password,
           phoneNumber,
-          username: phoneNumber
+          username: phoneNumber,
+          isDoctor: false
         };
         registerApi({
           data: registerApiData
@@ -71,7 +78,7 @@ export const LoginModal = ({ onClose, isOpen }: LoginModalProps) => {
       maxWidth='sm'
       fullWidth
       isLoading={isLoading}
-      submitButtonText='دریافت کد تایید'
+      submitButtonText='تایید'
       onSubmit={handleSubmit}
       submitButtonProps={{
         disabled: phoneNumber.slice(0, 2).toString() !== '09' || phoneNumber.length !== 11

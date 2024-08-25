@@ -4,5 +4,6 @@ export const websiteUrls = {
   expertiseSearch: '/search/expertise',
   patientProfile: '/patient',
   patientAppointments: '/patient/appointments',
-  patientInformation: '/patient/information'
+  patientInformation: '/patient/information',
+  schedule: 'checkout/schedule'
 } as const;

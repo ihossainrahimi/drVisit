@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Divider, Grid, Tab, Tabs, Typography } from '@mui/material';
+import { Button, Divider, Grid, Tab, Tabs, Theme, Typography, useMediaQuery } from '@mui/material';
 import Image from 'next/image';
 import { ChangeEvent, useState } from 'react';
 
@@ -9,6 +9,7 @@ import { Profile } from '@/components/Profile';
 import classes from './index.module.scss';
 
 const PatientAppointmentsPage = () => {
+  const isSmallScreen = useMediaQuery<Theme>((theme) => theme.breakpoints.down('sm'));
   const [value, setValue] = useState(0);
 
   const handleChange = (event: ChangeEvent<{}>, newValue: number) => {
@@ -16,7 +17,7 @@ const PatientAppointmentsPage = () => {
   };
 
   return (
-    <Grid container spacing={4}>
+    <Grid container spacing={4} direction={isSmallScreen ? 'column' : 'row'}>
       <Grid item xs={3}>
         <Profile />
       </Grid>

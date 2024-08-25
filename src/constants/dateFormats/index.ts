@@ -1,0 +1,2 @@
+export const DATE_FORMAT_MILADI_DASH = 'YYYY-MM-DD';
+export const DATE_FORMAT_JALAALI_DASH_WITH_TIME = 'jYYYY/jMM/jDD HH:mm';

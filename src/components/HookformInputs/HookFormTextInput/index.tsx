@@ -9,7 +9,7 @@ const HookFormTextInput = <T extends FieldValues>({
   name,
   control,
   ...rest
-}: TextFieldProps & HookFormTextInputProps & UseControllerProps<T>): JSX.Element => {
+}: TextFieldProps & HookFormTextInputProps & UseControllerProps<T>) => {
   return (
     <Controller
       name={name}

@@ -43,7 +43,7 @@ const HomePage = () => {
           <SearchInput />
         </Grid>
         <Grid item xs={12}></Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12}>
           <Testimonies title='دکتر‌دکتر' quotes={quotes} />
         </Grid>
       </Grid>

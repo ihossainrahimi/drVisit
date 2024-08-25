@@ -28,7 +28,6 @@ const TextFieldInput = ({
       onChange={onChange}
       value={value}
       label={label}
-      size='small'
       InputProps={{
         endAdornment:
           hasClearButton && value ? <ClearInputButton onClick={handleClearValue} /> : null

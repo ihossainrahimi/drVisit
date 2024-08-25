@@ -28,18 +28,18 @@ export const DesktopHeader = ({ onOpenLoginModal }: DesktopHeaderProps) => {
           </Button>
         </Grid>
 
-        {location.pathname !== websiteUrls.home && (
+        {typeof window !== 'undefined' && location.pathname !== websiteUrls.home && (
           <Grid item xs={5}>
             <SearchInput />
           </Grid>
         )}
 
-        {userData.data.id ? (
+        {userData.data.sub ? (
           <Grid item>
             <Link href={websiteUrls.patientProfile}>
               <Button startIcon={<PersonOutlined />} variant='outlined'>
                 <Typography color={colorPalette.main} variant='button'>
-                  {userData.data.username}
+                  {userData.data.sub}
                 </Typography>
               </Button>
             </Link>

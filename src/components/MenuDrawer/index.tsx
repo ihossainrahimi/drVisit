@@ -54,7 +54,7 @@ export const MenuDrawer = ({ isOpen, onClose }: MenuDrawerProps) => {
               </IconButton>
             </Grid>
           </Grid>
-          {userData.data.id ? (
+          {userData.data.sub ? (
             <Link href={websiteUrls.patientProfile}>
               <Button
                 className={classes.login_button}
@@ -63,7 +63,7 @@ export const MenuDrawer = ({ isOpen, onClose }: MenuDrawerProps) => {
                 startIcon={<PersonOutlined />}
               >
                 <Typography variant='button' color={colorPalette.main}>
-                  {userData.data.username}
+                  {userData.data.sub}
                 </Typography>
               </Button>
             </Link>

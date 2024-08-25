@@ -20,14 +20,14 @@ export const api = async (options?: AxiosRequestConfig, authenticate = true) => 
   const headers = options?.headers ? { ...options.headers } : {};
   if (authenticate) {
     const token = localStorage.getItem('token');
-    headers.Authorization = `Token ${token}`;
+    headers.Authorization = `Bearer ${token}`;
   }
 
   try {
     const response = await axiosInstance({
       ...options,
       headers,
-      url: `http://95.217.155.226:8000/api/${options?.url}/`
+      url: `http://localhost:8080/${options?.url}`
     });
     return response;
   } catch (error: any) {

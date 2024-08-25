@@ -15,7 +15,7 @@ import { TestimoniesProps } from './models';
 import { Testimony } from './Testimony';
 
 export const Testimonies = ({ quotes, title }: TestimoniesProps) => {
-  const isSmallScreen = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
+  const isSmallScreen = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
 
   return (
     <div className={classes.root}>

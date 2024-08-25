@@ -5,6 +5,7 @@ export interface RegisterApiData {
   firstName: string;
   lastName: string;
   gender: boolean;
+  isDoctor: boolean;
 }
 
 export interface RegisterApiResponse {
@@ -20,9 +21,9 @@ export interface RegisterApiResponse {
   address: string | null;
   params: null;
   roles: [];
-  createdAt: Date | null;
-  updatedAt: Date | null;
-  deletedAt: Date | null;
+  createdAt: string | null;
+  updatedAt: string | null;
+  deletedAt: string | null;
   enabled: boolean;
   authorities: [];
   accountNonExpired: boolean;
@@ -53,11 +54,11 @@ export interface Error {
 }
 
 export interface GetDoctorsByProfessionIdApiResponse {
-  doctors: Doctor[];
+  doctors: DoctorType[];
   professional: Professional;
 }
 
-export interface Doctor {
+export interface DoctorType {
   id: number;
   userId: number;
   professionalId: number;
@@ -70,25 +71,19 @@ export interface Doctor {
   officePhoneNumber: string;
   officeAddress: string;
   description: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface Professional {
   id: number;
   title: string;
   description: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 }
 
-export interface GetProfessionApiResponse {
-  id: number;
-  title: string;
-  description: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
+export type GetProfessionApiResponse = Professional[];
 
 export interface SetDoctorRateApiBody {
   doctorId: number;
@@ -114,29 +109,29 @@ export interface Rate {
 }
 
 export type GetDoctorSchedulesQuery = Partial<{
-  from: Date;
+  from: string;
 }>;
 
-export type GetDoctorSchedulesResponse = Schedule[];
+export type GetDoctorSchedulesResponse = ScheduleType[];
 
 export type DeleteDoctorScheduleApiBody = number[];
 
-export interface Schedule {
+export interface ScheduleType {
   id: number;
   doctorId: number;
   customerId: null;
-  startedAt: Date;
-  endAt: Date;
+  startedAt: string;
+  endAt: string;
   duration: number;
   isFree: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
   deletedAt: null;
 }
 
-export type GetScheduleApiResponse = Schedule;
+export type GetScheduleApiResponse = ScheduleType;
 
-export type AssignScheduleToCustomerApiResponse = Schedule[];
+export type AssignScheduleToCustomerApiResponse = ScheduleType[];
 
 export interface UserCompleteInfo {
   id: number;
@@ -151,9 +146,9 @@ export interface UserCompleteInfo {
   address: string | null;
   params: null;
   roles: any[];
-  createdAt: Date | null;
-  updatedAt: Date | null;
-  deletedAt: Date | null;
+  createdAt: string | null;
+  updatedAt: string | null;
+  deletedAt: string | null;
   enabled: boolean;
   authorities: any[];
   accountNonExpired: boolean;
@@ -165,8 +160,8 @@ export type GetUserInfoApiResponse = UserCompleteInfo;
 
 export interface CreateVisitApiBody {
   doctorId: number;
-  startedAt: Date;
-  endAt: Date;
+  startedAt: string;
+  endAt: string;
   duration: number;
 }
 

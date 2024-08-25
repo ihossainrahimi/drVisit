@@ -44,7 +44,7 @@ export const MobileHeader = ({ onOpenLoginModal }: MobileHeaderProps) => {
           </Button>
         </Grid>
         <Grid item>
-          {userData.data.id ? (
+          {userData.data.sub ? (
             <Link href={websiteUrls.patientProfile}>
               <IconButton color='primary'>
                 <PersonOutlined />

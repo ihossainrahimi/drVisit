@@ -11,7 +11,6 @@ const NumberInput = ({
   fieldState: { error },
   commafyValue,
   required,
-  type = 'number',
   ...rest
 }: FieldValues) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -36,10 +35,8 @@ const NumberInput = ({
   return (
     <TextField
       required={required}
-      type={type}
       inputRef={ref}
       helperText={error ? error.message : null}
-      size='small'
       error={!!error}
       onChange={handleChange}
       value={getValue}

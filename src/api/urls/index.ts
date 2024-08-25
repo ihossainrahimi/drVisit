@@ -9,7 +9,7 @@ export const apiUrls = {
   },
   getDoctorsByProfessionIdApi: {
     method: 'GET',
-    url: 'api/doctors/professional/{{professionId}}'
+    url: 'api/doctors/professionals/{{professionId}}'
   },
   getProfessionApi: {
     method: 'GET',
@@ -25,7 +25,7 @@ export const apiUrls = {
   },
   getDoctorSchedules: {
     method: 'GET',
-    url: 'api/schedules/{{doctorId}}'
+    url: 'api/schedules/doctors/{{doctorId}}'
   },
   deleteDoctorScheduleApi: {
     method: 'DELETE',

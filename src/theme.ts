@@ -22,7 +22,7 @@ export const applicationTheme = () => {
     typography: {
       allVariants: {
         color: colorPalette.foreground,
-        fontFamily: '"Rubik"'
+        fontFamily: '"Vazirmatn", sans-serif'
       }
     }
   });

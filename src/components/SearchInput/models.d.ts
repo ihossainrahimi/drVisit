@@ -1,6 +1,6 @@
 import { Professional } from '@/api/methods/models';
 
 export interface SearchInputProps {
-  professions: Professional[];
+  professions?: Professional[];
   isProfessionsPassed?: boolean;
 }

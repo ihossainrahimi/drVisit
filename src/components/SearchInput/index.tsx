@@ -13,7 +13,7 @@ export const SearchInput = ({ professions, isProfessionsPassed }: SearchInputPro
   const router = useRouter();
 
   useEffect(() => {
-    if (isProfessionsPassed && professions.length) {
+    if (isProfessionsPassed && professions?.length) {
       setLocalProfessions(professions);
     } else {
       getProfessionApi().then((response) => {

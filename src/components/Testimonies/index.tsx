@@ -19,10 +19,10 @@ export const Testimonies = ({ quotes, title }: TestimoniesProps) => {
 
   return (
     <div className={classes.root}>
-      <Typography variant='h4' color='black' align='center' component='h2' className='mb-16'>
+      <Typography variant='h4' color='grey' align='center' component='h2' className='mb-16'>
         {title} از نگاه مشتریان
       </Typography>
-      <Typography variant='h6' color='blackMediumEmphasis' align='center' component='p'>
+      <Typography marginTop={3} variant='h6' color='darkgrey' align='center' component='p'>
         همیشه برای خواندن نظرات شما آماده‌ایم.
       </Typography>
       <div className={classes.slider_container}>

@@ -9,6 +9,7 @@ import {
   CreateVisitApiBody,
   CreateVisitApiResponse,
   DeleteDoctorScheduleApiBody,
+  GetDoctorRatesApiResponse,
   GetDoctorsByProfessionIdApiResponse,
   GetDoctorSchedulesQuery,
   GetDoctorSchedulesResponse,
@@ -65,12 +66,12 @@ export const setDoctorRateApi = ({
 };
 
 export const getDoctorRatesApi = ({
-  professionId
+  doctorId
 }: {
-  professionId: number;
-}): Promise<AxiosResponse<GetDoctorsByProfessionIdApiResponse>> => {
+  doctorId: number;
+}): Promise<AxiosResponse<GetDoctorRatesApiResponse>> => {
   const { method, url } = apiUrls.getDoctorRatesApi;
-  return api({ method, url: formatStringByKey(url, { professionId }) });
+  return api({ method, url: formatStringByKey(url, { doctorId }) });
 };
 
 export const getDoctorSchedulesApi = ({

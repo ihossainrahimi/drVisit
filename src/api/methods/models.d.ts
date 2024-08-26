@@ -1,3 +1,5 @@
+import { HttpStatusCode } from 'axios';
+
 export interface RegisterApiData {
   username: string;
   password: string;
@@ -48,9 +50,11 @@ export interface User {
 }
 
 export interface Error {
-  code: string;
-  message: string;
-  subErrors: null;
+  type: string;
+  title: string;
+  status: HttpStatusCode;
+  detail: string;
+  instance: string;
 }
 
 export interface GetDoctorsByProfessionIdApiResponse {
@@ -94,7 +98,7 @@ export interface SetDoctorRateApiBody {
 
 export type SetDoctorRateApiResponse = Rate;
 
-export interface getDoctorRatesApiResponse {
+export interface GetDoctorRatesApiResponse {
   rates: Rate[];
   averageScore: number;
 }

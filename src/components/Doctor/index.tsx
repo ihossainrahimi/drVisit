@@ -1,4 +1,6 @@
-import { Home, MonetizationOn, Phone } from '@mui/icons-material';
+'use client';
+
+import { Home, MonetizationOn, Phone, Star } from '@mui/icons-material';
 import {
   Button,
   Card,
@@ -10,7 +12,9 @@ import {
   Typography
 } from '@mui/material';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
+import { getDoctorRatesApi } from '@/api/methods';
 import { websiteUrls } from '@/constants/urls';
 import { formatNumberWithSeparator } from '@/utils/formatNumberWithoutSeparator';
 
@@ -18,9 +22,32 @@ import classes from './index.module.scss';
 import { DoctorProps } from './models';
 
 export const Doctor = ({ doctor }: DoctorProps) => {
+  const [rate, setRate] = useState<number | null>(null);
+
+  useEffect(() => {
+    getDoctorRatesApi({ doctorId: doctor.id })
+      .then((response) => {
+        setRate(response.data.averageScore);
+      })
+      .catch(() => undefined);
+  }, []);
+
   return (
     <Card elevation={4} className={classes.root}>
-      <CardHeader title={doctor.title} subheader={doctor.city} />
+      <CardHeader
+        title={doctor.title}
+        subheader={doctor.city}
+        action={
+          <Grid container spacing={1} alignItems='center'>
+            <Grid item>
+              <Star color='warning' />
+            </Grid>
+            <Grid item>
+              <Typography variant='body2'>{rate}</Typography>
+            </Grid>
+          </Grid>
+        }
+      />
       <Divider />
       <CardContent>
         <Typography marginTop={1} variant='subtitle1'>

@@ -1,3 +1,5 @@
+'use client';
+
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
 
@@ -8,8 +10,8 @@ const handleResponse = (response: AxiosResponse) => {
 };
 
 const handleError = (error: AxiosError<Error>) => {
-  toast.error(error.response?.data.message);
-  return error;
+  toast.error(error.response?.data.title);
+  return Promise.reject(error);
 };
 
 const axiosInstance = axios.create();
@@ -29,9 +31,9 @@ export const api = async (options?: AxiosRequestConfig, authenticate = true) => 
       headers,
       url: `http://localhost:8080/${options?.url}`
     });
+
     return response;
   } catch (error: any) {
-    toast.error('a problem');
     return Promise.reject(error);
   }
 };

@@ -26,7 +26,7 @@ const SearchDoctorPage = () => {
       <Grid marginTop={8} container spacing={2}>
         {doctors.map((doctor) => (
           <Grid item xs={4} key={doctor.id}>
-            <Doctor doctor={doctor} />
+            <Doctor doctor={doctor} professionId={professionId} hasActions />
           </Grid>
         ))}
       </Grid>

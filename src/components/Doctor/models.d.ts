@@ -1,5 +1,7 @@
 import { DoctorType } from '@/api/methods/models';
 
-export interface DoctorProps {
+export type DoctorProps = {
   doctor: DoctorType;
-}
+  professionId?: number;
+  hasActions?: boolean;
+};

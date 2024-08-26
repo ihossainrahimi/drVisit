@@ -21,7 +21,7 @@ import { formatNumberWithSeparator } from '@/utils/formatNumberWithoutSeparator'
 import classes from './index.module.scss';
 import { DoctorProps } from './models';
 
-export const Doctor = ({ doctor }: DoctorProps) => {
+export const Doctor = ({ doctor, professionId, hasActions }: DoctorProps) => {
   const [rate, setRate] = useState<number | null>(null);
 
   useEffect(() => {
@@ -83,22 +83,25 @@ export const Doctor = ({ doctor }: DoctorProps) => {
           </Grid>
         </Grid>
       </CardContent>
-      <CardActions>
-        <Button variant='contained'>
-          <Link
-            href={{
-              pathname: `/${websiteUrls.schedule}`,
-              query: {
-                doctorId: doctor.id
-              }
-            }}
-          >
-            <Typography variant='button' color='white'>
-              ثبت نوبت
-            </Typography>
-          </Link>
-        </Button>
-      </CardActions>
+      {hasActions && (
+        <CardActions>
+          <Button variant='contained'>
+            <Link
+              href={{
+                pathname: `/${websiteUrls.schedule}`,
+                query: {
+                  doctorId: doctor.id,
+                  type: professionId
+                }
+              }}
+            >
+              <Typography variant='button' color='white'>
+                ثبت نوبت
+              </Typography>
+            </Link>
+          </Button>
+        </CardActions>
+      )}
     </Card>
   );
 };

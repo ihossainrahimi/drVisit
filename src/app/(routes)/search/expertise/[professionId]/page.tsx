@@ -25,7 +25,7 @@ const SearchDoctorPage = () => {
       <Typography variant='h6'>دکتر‌دکتر - لیست تخصص های پزشکی فعال</Typography>
       <Grid marginTop={8} container spacing={2}>
         {doctors.map((doctor) => (
-          <Grid item xs={4} key={doctor.id}>
+          <Grid item xs={12} md={4} key={doctor.id}>
             <Doctor doctor={doctor} professionId={professionId} hasActions />
           </Grid>
         ))}

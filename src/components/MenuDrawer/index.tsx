@@ -21,7 +21,7 @@ import { LoginModal } from '../LoginModal';
 import classes from './index.module.scss';
 import { MenuDrawerProps } from './models';
 
-export const MenuDrawer = ({ isOpen, onClose }: MenuDrawerProps) => {
+export const MenuDrawer = ({ isOpen, onClose, professions }: MenuDrawerProps) => {
   const userData = useAppSelector((state) => state.userData);
   const [isOpenLoginModal, setIsOpenLoginModal] = useState(false);
 
@@ -89,7 +89,17 @@ export const MenuDrawer = ({ isOpen, onClose }: MenuDrawerProps) => {
               <AccordionSummary expandIcon={<ExpandMore />}>
                 <Typography variant='body2'>تخصص ها</Typography>
               </AccordionSummary>
-              <AccordionDetails></AccordionDetails>
+              <AccordionDetails>
+                <Grid container spacing={1} direction='column'>
+                  {professions.map((profession) => (
+                    <Grid item key={profession.id}>
+                      <Link href={`${websiteUrls.expertiseSearch}/${profession.id}`}>
+                        <Typography variant='caption'>{profession.title}</Typography>
+                      </Link>
+                    </Grid>
+                  ))}
+                </Grid>
+              </AccordionDetails>
             </Accordion>
             <Divider className={classes.divider} />
             <Link href={websiteUrls.drLogin}>

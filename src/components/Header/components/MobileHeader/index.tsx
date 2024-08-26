@@ -12,7 +12,7 @@ import { useAppSelector } from '@/store';
 
 import { MobileHeaderProps } from './models';
 
-export const MobileHeader = ({ onOpenLoginModal }: MobileHeaderProps) => {
+export const MobileHeader = ({ onOpenLoginModal, professions }: MobileHeaderProps) => {
   const userData = useAppSelector((state) => state.userData);
 
   const [isOpenMenuDrawer, setIsOpenMenuDrawer] = useState(false);
@@ -27,7 +27,11 @@ export const MobileHeader = ({ onOpenLoginModal }: MobileHeaderProps) => {
 
   return (
     <>
-      <MenuDrawer isOpen={isOpenMenuDrawer} onClose={handleCloseMenuDrawer} />
+      <MenuDrawer
+        isOpen={isOpenMenuDrawer}
+        onClose={handleCloseMenuDrawer}
+        professions={professions}
+      />
       <Grid container justifyContent='space-between' alignItems='center'>
         <Grid item>
           <IconButton onClick={handleOpenMenuDrawer} color='primary'>

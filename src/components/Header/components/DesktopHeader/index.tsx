@@ -3,7 +3,11 @@
 import { Favorite, PersonOutlined } from '@mui/icons-material';
 import { Button, Grid, Typography } from '@mui/material';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
+import { getProfessionApi } from '@/api/methods';
+import { Professional } from '@/api/methods/models';
+import { ProfessionsMenu } from '@/components/ProfessionsMenu';
 import { SearchInput } from '@/components/SearchInput';
 import { colorPalette } from '@/constants/colorPalette';
 import { websiteUrls } from '@/constants/urls';
@@ -13,7 +17,23 @@ import classes from './index.module.scss';
 import { DesktopHeaderProps } from './models';
 
 export const DesktopHeader = ({ onOpenLoginModal }: DesktopHeaderProps) => {
+  const [professions, setProfessions] = useState<Professional[]>([]);
+  const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
   const userData = useAppSelector((state) => state.userData);
+
+  useEffect(() => {
+    getProfessionApi().then((response) => {
+      setProfessions(response.data);
+    });
+  }, []);
+
+  const handleOpenProfessionsMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorElement(event.currentTarget);
+  };
+
+  const handleCloseProfessionsMenu = () => {
+    setAnchorElement(null);
+  };
 
   return (
     <>
@@ -28,9 +48,9 @@ export const DesktopHeader = ({ onOpenLoginModal }: DesktopHeaderProps) => {
           </Button>
         </Grid>
 
-        {typeof window !== 'undefined' && location.pathname !== websiteUrls.home && (
+        {location.pathname !== websiteUrls.home && (
           <Grid item xs={5}>
-            <SearchInput />
+            <SearchInput professions={professions} />
           </Grid>
         )}
 
@@ -56,14 +76,16 @@ export const DesktopHeader = ({ onOpenLoginModal }: DesktopHeaderProps) => {
       </Grid>
       <Grid container justifyContent='space-between' alignItems='center' className={classes.navbar}>
         <Grid item>
-          <Grid container spacing={2}>
+          <Grid container spacing={2} alignItems='center'>
             <Grid item>
               <Link href={websiteUrls.expertiseSearch}>
                 <Typography variant='body2'>نوبت دهی</Typography>
               </Link>
             </Grid>
             <Grid item>
-              <Typography variant='body2'>تخصص ها</Typography>
+              <Button onClick={handleOpenProfessionsMenu}>
+                <Typography variant='body2'>تخصص ها</Typography>
+              </Button>
             </Grid>
           </Grid>
         </Grid>
@@ -75,6 +97,12 @@ export const DesktopHeader = ({ onOpenLoginModal }: DesktopHeaderProps) => {
           </Link>
         </Grid>
       </Grid>
+      <ProfessionsMenu
+        professions={professions || []}
+        onClose={handleCloseProfessionsMenu}
+        isOpen={Boolean(anchorElement)}
+        anchorElement={anchorElement}
+      />
     </>
   );
 };

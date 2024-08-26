@@ -21,7 +21,7 @@ export const Header = () => {
     setIsOpenLoginModal(false);
   };
 
-  if (typeof window !== 'undefined' && location.pathname.includes('sign-in')) {
+  if (location.pathname.includes('sign-in')) {
     return null;
   }
 

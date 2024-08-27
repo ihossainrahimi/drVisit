@@ -27,7 +27,7 @@ export const DesktopHeader = ({ onOpenLoginModal, professions }: DesktopHeaderPr
   };
 
   return (
-    <>
+    <div suppressHydrationWarning>
       <Grid container justifyContent='space-between' alignItems='center'>
         <Grid item>
           <Button startIcon={<Favorite color='error' />}>
@@ -39,7 +39,7 @@ export const DesktopHeader = ({ onOpenLoginModal, professions }: DesktopHeaderPr
           </Button>
         </Grid>
 
-        {location.pathname !== websiteUrls.home && (
+        {typeof window !== 'undefined' && location.pathname !== websiteUrls.home && (
           <Grid item xs={5}>
             <SearchInput professions={professions} />
           </Grid>
@@ -94,6 +94,6 @@ export const DesktopHeader = ({ onOpenLoginModal, professions }: DesktopHeaderPr
         isOpen={Boolean(anchorElement)}
         anchorElement={anchorElement}
       />
-    </>
+    </div>
   );
 };

@@ -31,12 +31,15 @@ export const Header = () => {
     setIsOpenLoginModal(false);
   };
 
-  if (location.pathname.includes('sign-in')) {
+  if (typeof window !== 'undefined' && location.pathname.includes('sign-in')) {
     return null;
   }
 
   return (
-    <div className={`${classes.root} ${isSmallScreen ? classes.rootMobile : ''}`}>
+    <div
+      suppressHydrationWarning
+      className={`${classes.root} ${isSmallScreen ? classes.rootMobile : ''}`}
+    >
       <LoginModal isOpen={isOpenLoginModal} onClose={handleCloseLoginModal} />
       {isSmallScreen ? (
         <MobileHeader professions={professions} onOpenLoginModal={handleOpenLoginModal} />

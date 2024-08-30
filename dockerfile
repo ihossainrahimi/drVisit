@@ -1,5 +1,5 @@
 # Select the image to use
-FROM node:18.17.1
+FROM node:20.12.2
 
 ## Install dependencies in the root of the Container
 RUN npm i -g pnpm@9.0.4

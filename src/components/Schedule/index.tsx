@@ -40,7 +40,6 @@ export const Schedule = ({ schedule }: ScheduleProps) => {
     <Tooltip title={`مدت زمان: ${schedule.duration} دقیقه`}>
       <LoadingButton
         onClick={handleAssignScheduleToCustomer}
-        dir='ltr'
         variant='outlined'
         disabled={!schedule.isFree}
         loading={isLoading}

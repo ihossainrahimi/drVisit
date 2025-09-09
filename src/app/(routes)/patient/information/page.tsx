@@ -2,12 +2,14 @@
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Person } from '@mui/icons-material';
-import { Button, Divider, Grid, Theme, Typography, useMediaQuery } from '@mui/material';
-import { useEffect } from 'react';
+import { LoadingButton } from '@mui/lab';
+import { Divider, Grid, Theme, Typography, useMediaQuery } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import * as yup from 'yup';
 
-import { getUserInfoApi } from '@/api/methods';
+import { getUserInfoApi, updateUserInfo } from '@/api/methods';
 import HookFormNumberInput from '@/components/HookformInputs/HookFormNumberInput';
 import HookFormRadioGroupInput from '@/components/HookformInputs/HookFormRadioGroupInput';
 import HookFormTextInput from '@/components/HookformInputs/HookFormTextInput';
@@ -25,10 +27,10 @@ import { nationalIdValidation as validateNationalId } from '@/utils/validations/
 import classes from './index.module.scss';
 
 const patientInformationValidationSchema = yup.object().shape({
-  nationalId: yup
+  nationalCode: yup
     .string()
     .required(VALIDATION_MESSAGE_REQUIRED)
-    .test('nationalId', VALIDATION_MESSAGE_NATIONAL_ID, validateNationalId),
+    .test('nationalCode', VALIDATION_MESSAGE_NATIONAL_ID, validateNationalId),
   firstName: yup
     .string()
     .required(VALIDATION_MESSAGE_REQUIRED)
@@ -38,7 +40,8 @@ const patientInformationValidationSchema = yup.object().shape({
     .required(VALIDATION_MESSAGE_REQUIRED)
     .matches(PERSIAN_CHARACTER_REGEX, { message: VALIDATION_MESSAGE_PERSIAN_CHARACTER }),
   gender: yup.bool().required(VALIDATION_MESSAGE_REQUIRED),
-  address: yup.string().required(VALIDATION_MESSAGE_REQUIRED)
+  address: yup.string().required(VALIDATION_MESSAGE_REQUIRED),
+  username: yup.string().required(VALIDATION_MESSAGE_REQUIRED)
 });
 
 const defaultValues = {
@@ -46,7 +49,8 @@ const defaultValues = {
   lastName: '',
   gender: true,
   address: '',
-  nationalId: ''
+  nationalCode: '',
+  username: ''
 };
 
 const PatientInformationPage = () => {
@@ -54,6 +58,7 @@ const PatientInformationPage = () => {
 
   const userData = useAppSelector((state) => state.userData);
 
+  const [isLoading, setIsLoading] = useState(false);
   const { control, handleSubmit, reset } = useForm({
     defaultValues,
     resolver: yupResolver(patientInformationValidationSchema)
@@ -64,18 +69,29 @@ const PatientInformationPage = () => {
       getUserInfoApi({ userId: userData.data.sub })
         .then((response) => {
           reset({
+            username: response.data.username,
             firstName: response.data.firstName,
             lastName: response.data.lastName,
             gender: response.data.gender,
             address: response.data.address || '',
-            nationalId: response.data.nationalId || ''
+            nationalCode: response.data.nationalId || ''
           });
         })
         .catch(() => undefined);
     }
   }, [userData?.data?.sub]);
 
-  const handleSubmitForm = () => {};
+  const handleSubmitForm = (values: typeof defaultValues) => {
+    setIsLoading(true);
+    updateUserInfo({ data: values })
+      .then(() => {
+        toast.success('اطلاعات کاربری شما با موفقیت تغییر کرد.');
+      })
+      .catch(() => undefined)
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
 
   return (
     <Grid container spacing={4} direction={isSmallScreen ? 'column' : 'row'}>
@@ -118,7 +134,7 @@ const PatientInformationPage = () => {
               InputProps={{
                 className: classes.form_input
               }}
-              name='nationalId'
+              name='nationalCode'
               label='کد ملی'
               control={control}
             />
@@ -145,11 +161,15 @@ const PatientInformationPage = () => {
             />
           </Grid>
           <Grid item xs textAlign='center'>
-            <Button onClick={handleSubmit(handleSubmitForm)} variant='contained'>
+            <LoadingButton
+              loading={isLoading}
+              onClick={handleSubmit(handleSubmitForm)}
+              variant='contained'
+            >
               <Typography variant='button' color='white'>
                 ثبت تغییرات
               </Typography>
-            </Button>
+            </LoadingButton>
           </Grid>
         </Grid>
       </Grid>

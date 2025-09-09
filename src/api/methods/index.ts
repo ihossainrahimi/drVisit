@@ -9,6 +9,7 @@ import {
   CreateVisitApiBody,
   CreateVisitApiResponse,
   DeleteDoctorScheduleApiBody,
+  GetCustomerVisitsResponse,
   GetDoctorRatesApiResponse,
   GetDoctorsByProfessionIdApiResponse,
   GetDoctorSchedulesQuery,
@@ -21,7 +22,9 @@ import {
   RegisterApiData,
   RegisterApiResponse,
   SetDoctorRateApiBody,
-  SetDoctorRateApiResponse
+  SetDoctorRateApiResponse,
+  UpdateUserInfoBody,
+  UpdateUserInfoResponse
 } from './models';
 
 export const registerApi = ({
@@ -130,4 +133,22 @@ export const createVisitApi = ({
 }): Promise<AxiosResponse<CreateVisitApiResponse>> => {
   const { method, url } = apiUrls.createVisit;
   return api({ data, method, url });
+};
+
+export const updateUserInfo = ({
+  data
+}: {
+  data: UpdateUserInfoBody;
+}): Promise<AxiosResponse<UpdateUserInfoResponse>> => {
+  const { method, url } = apiUrls.createVisit;
+  return api({ data, method, url });
+};
+
+export const getCustomerVisitsService = ({
+  customerId
+}: {
+  customerId: number;
+}): Promise<AxiosResponse<GetCustomerVisitsResponse>> => {
+  const { method, url } = apiUrls.getCustomerVisits;
+  return api({ method, url: formatStringByKey(url, { customerId }) });
 };

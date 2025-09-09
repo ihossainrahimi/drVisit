@@ -170,3 +170,54 @@ export interface CreateVisitApiBody {
 }
 
 export interface CreateVisitApiResponse {}
+
+export interface GetCustomerVisitsResponse {
+  lastVisits: Visit[];
+  onGoingVisits: Visit[];
+}
+
+export interface Visit {
+  id: number;
+  doctorId: number;
+  doctorTitle: string;
+  professional: string;
+  customerId: number;
+  startedAt: Date;
+  endAt: Date;
+  duration: number;
+  isFree: boolean;
+  createdAt: null;
+  price: number;
+}
+
+export type UpdateUserInfoBody = {
+  username: string;
+  firstName: string;
+  lastName: string;
+  nationalCode: string;
+  gender: boolean;
+  address: string;
+};
+
+export type UpdateUserInfoResponse = {
+  id: number;
+  username: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  gender: boolean;
+  nationalId: null;
+  isDoctor: null;
+  address: string;
+  params: null;
+  roles: any[];
+  createdAt: null;
+  updatedAt: null;
+  deletedAt: null;
+  enabled: boolean;
+  authorities: any[];
+  accountNonExpired: boolean;
+  accountNonLocked: boolean;
+  credentialsNonExpired: boolean;
+};

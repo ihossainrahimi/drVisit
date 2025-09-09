@@ -43,8 +43,16 @@ export const apiUrls = {
     method: 'GET',
     url: 'api/users/{{userId}}'
   },
+  updateUserInfo: {
+    method: 'PUT',
+    url: 'api/users'
+  },
   createVisit: {
     method: 'POST',
     url: 'api/visits'
+  },
+  getCustomerVisits: {
+    method: 'GET',
+    url: 'api/visits/customers/{{customerId}}'
   }
 } as const;

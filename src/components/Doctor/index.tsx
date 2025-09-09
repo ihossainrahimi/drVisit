@@ -16,7 +16,7 @@ import { useEffect, useState } from 'react';
 
 import { getDoctorRatesApi } from '@/api/methods';
 import { websiteUrls } from '@/constants/urls';
-import { formatNumberWithSeparator } from '@/utils/formatNumberWithoutSeparator';
+import { formatNumberWithSeparator } from '@/utils/formatNumberWithSeparator';
 
 import classes from './index.module.scss';
 import { DoctorProps } from './models';

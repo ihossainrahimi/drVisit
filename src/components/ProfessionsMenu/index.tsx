@@ -22,7 +22,7 @@ export const ProfessionsMenu = ({
       onClose={onClose}
     >
       <Grid padding={4} direction='row-reverse' container spacing={4}>
-        {professions.map((profession) => (
+        {professions?.map((profession) => (
           <Grid item key={profession.id}>
             <Button onClick={onClose}>
               <Link href={`${websiteUrls.expertiseSearch}/${profession.id}`}>

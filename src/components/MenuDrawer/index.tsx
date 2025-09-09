@@ -91,7 +91,7 @@ export const MenuDrawer = ({ isOpen, onClose, professions }: MenuDrawerProps) =>
               </AccordionSummary>
               <AccordionDetails>
                 <Grid container spacing={1} direction='column'>
-                  {professions.map((profession) => (
+                  {professions?.map((profession) => (
                     <Grid item key={profession.id}>
                       <Link href={`${websiteUrls.expertiseSearch}/${profession.id}`}>
                         <Typography variant='caption'>{profession.title}</Typography>

@@ -19,9 +19,7 @@ const SearchExpertisePage = () => {
   return (
     <>
       <Typography variant='h6'>دکتر‌دکتر - لیست تخصص های پزشکی فعال</Typography>
-      {professions.map((profession) => (
-        <Profession profession={profession} key={profession.id} />
-      ))}
+      {professions?.map((profession) => <Profession profession={profession} key={profession.id} />)}
     </>
   );
 };

@@ -25,7 +25,7 @@ export const apiUrls = {
   },
   getDoctorSchedules: {
     method: 'GET',
-    url: 'api/schedules/doctors/{{doctorId}}'
+    url: 'api/visits/doctors/{{doctorId}}'
   },
   deleteDoctorScheduleApi: {
     method: 'DELETE',

@@ -19,45 +19,6 @@ import { DATE_FORMAT_MILADI_DASH } from '@/constants/dateFormats';
 
 import classes from './index.module.scss';
 
-const scheduless = [
-  {
-    id: 1,
-    doctorId: 1,
-    customerId: null,
-    startedAt: '2024-08-10T16:09:01',
-    endAt: '2024-08-10T16:19:04',
-    duration: 10,
-    isFree: true,
-    createdAt: '2024-08-10T16:08:44',
-    updatedAt: '2024-08-10T16:09:30',
-    deletedAt: null
-  },
-  {
-    id: 2,
-    doctorId: 1,
-    customerId: null,
-    startedAt: '2024-08-10T16:19:01',
-    endAt: '2024-08-10T16:29:04',
-    duration: 10,
-    isFree: true,
-    createdAt: '2024-08-10T16:08:44',
-    updatedAt: '2024-08-10T16:09:30',
-    deletedAt: null
-  },
-  {
-    id: 3,
-    doctorId: 1,
-    customerId: null,
-    startedAt: '2024-08-10T16:29:01',
-    endAt: '2024-08-10T16:39:04',
-    duration: 10,
-    isFree: true,
-    createdAt: '2024-08-10T16:08:44',
-    updatedAt: '2024-08-10T16:09:30',
-    deletedAt: null
-  }
-];
-
 const SchedulePage = () => {
   const searchParams = useSearchParams();
   const [schedules, setSchedules] = useState<ScheduleType[]>([]);
@@ -73,13 +34,13 @@ const SchedulePage = () => {
 
     Promise.all([
       getDoctorRatesApi({ doctorId }),
-      getDoctorsByProfessionIdApi({ professionId: type })
-      // getDoctorSchedulesApi({ doctorId, params: { from: now } }),
+      getDoctorsByProfessionIdApi({ professionId: type }),
+      getDoctorSchedulesApi({ doctorId, params: { from: now } })
     ])
       .then((responses) => {
         setComments(responses[0].data.rates);
         setDoctor(responses[1].data.doctors.find((doctor) => doctor.id === doctorId));
-        // setSchedules(responses[2].data || []);
+        setSchedules(responses[2].data || []);
       })
       .catch(() => undefined)
       .finally(() => {
@@ -107,7 +68,7 @@ const SchedulePage = () => {
       <Divider className={classes.divider} />
       <Typography variant='h4'>رزرو وقت</Typography>
       <Grid container spacing={2} marginTop={2} marginBottom={6}>
-        {scheduless.map((schedule) => (
+        {schedules.map((schedule) => (
           <Grid item key={schedule.id}>
             <Schedule schedule={schedule} />
           </Grid>

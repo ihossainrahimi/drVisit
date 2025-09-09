@@ -75,7 +75,7 @@ const PatientAppointmentsPage = () => {
                 <Grid item>
                   زمان ویزیت: {jMoment(visit.startedAt).format(DATE_FORMAT_JALAALI_DASH_WITH_TIME)}
                 </Grid>
-                <Grid item>هزینه: {formatNumberWithSeparator(visit.price)} تومان</Grid>
+                <Grid item>هزینه: {formatNumberWithSeparator(visit.price / 10)} تومان</Grid>
               </Grid>
             ))
           ) : (

@@ -194,7 +194,7 @@ export type UpdateUserInfoBody = {
   username: string;
   firstName: string;
   lastName: string;
-  nationalCode: string;
+  nationalId: string;
   gender: boolean;
   address: string;
 };

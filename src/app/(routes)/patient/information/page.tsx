@@ -27,10 +27,10 @@ import { nationalIdValidation as validateNationalId } from '@/utils/validations/
 import classes from './index.module.scss';
 
 const patientInformationValidationSchema = yup.object().shape({
-  nationalCode: yup
+  nationalId: yup
     .string()
     .required(VALIDATION_MESSAGE_REQUIRED)
-    .test('nationalCode', VALIDATION_MESSAGE_NATIONAL_ID, validateNationalId),
+    .test('nationalId', VALIDATION_MESSAGE_NATIONAL_ID, validateNationalId),
   firstName: yup
     .string()
     .required(VALIDATION_MESSAGE_REQUIRED)
@@ -49,7 +49,7 @@ const defaultValues = {
   lastName: '',
   gender: true,
   address: '',
-  nationalCode: '',
+  nationalId: '',
   username: ''
 };
 
@@ -74,7 +74,7 @@ const PatientInformationPage = () => {
             lastName: response.data.lastName,
             gender: response.data.gender,
             address: response.data.address || '',
-            nationalCode: response.data.nationalId || ''
+            nationalId: response.data.nationalId || ''
           });
         })
         .catch(() => undefined);
@@ -134,7 +134,7 @@ const PatientInformationPage = () => {
               InputProps={{
                 className: classes.form_input
               }}
-              name='nationalCode'
+              name='nationalId'
               label='کد ملی'
               control={control}
             />

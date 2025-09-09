@@ -29,15 +29,15 @@ export const apiUrls = {
   },
   deleteDoctorScheduleApi: {
     method: 'DELETE',
-    url: 'api/schedules'
+    url: 'api/visits'
   },
   getSchedule: {
     method: 'GET',
-    url: 'api/schedules/{{scheduleId}}'
+    url: 'api/visits/{{scheduleId}}'
   },
   assignScheduleToCustomer: {
     method: 'POST',
-    url: 'api/schedules/{{scheduleId}}/customers/{{customerId}}'
+    url: 'api/visits/{{scheduleId}}/customers/{{customerId}}'
   },
   getUserInfo: {
     method: 'GET',
